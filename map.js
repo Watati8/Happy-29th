@@ -3,6 +3,7 @@
 
 // This script uses Three.js and Globe.gl — ensure both are loaded in your HTML
 
+import Globe from 'https://cdn.jsdelivr.net/npm/globe.gl@2.24.6/dist/globe.gl.min.js';
 const world = Globe()(document.getElementById('globeViz'))
   .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
   .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
