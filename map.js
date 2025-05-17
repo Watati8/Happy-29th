@@ -1,44 +1,58 @@
-// map.js
-// Interactive spinning globe with heart-line animation from Kenya to Dubai to Australia
+// map.js — Interactive Spinning Globe with Heart Route
 
-// This script uses Three.js and Globe.gl — ensure both are loaded in your HTML
-
-import Globe from 'https://cdn.jsdelivr.net/npm/globe.gl@2.24.6/dist/globe.gl.min.js';
-const world = Globe()(document.getElementById('globeViz'))
-  .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
-  .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
-  .showAtmosphere(true)
-  .atmosphereColor('#3a228a')
-  .atmosphereAltitude(0.25)
-  .pointOfView({ lat: 0, lng: 0, altitude: 2 }, 4000)
-  .width(window.innerWidth)
-  .height(window.innerHeight);
-
-// Country coordinates
-const locations = [
-  { name: 'Kenya', lat: -1.286389, lng: 36.817223 },
-  { name: 'Dubai', lat: 25.276987, lng: 55.296249 },
-  { name: 'Australia', lat: -31.950527, lng: 115.860457 } // Perth
+let globe;
+const countries = [
+  { name: "Kenya", lat: -1.2921, lng: 36.8219, message: "Where our story began ❤️" },
+  { name: "Dubai", lat: 25.276987, lng: 55.296249, message: "Where you asked me to be yours 🥹" },
+  { name: "Perth", lat: -31.9505, lng: 115.8605, message: "Where your heart waits for me 💚" }
 ];
 
-// Arc paths to form a heart-ish route
-const arcsData = [
-  { startLat: locations[0].lat, startLng: locations[0].lng, endLat: locations[1].lat, endLng: locations[1].lng, color: ['red'] },
-  { startLat: locations[1].lat, startLng: locations[1].lng, endLat: locations[2].lat, endLng: locations[2].lng, color: ['green'] },
-  { startLat: locations[2].lat, startLng: locations[2].lng, endLat: locations[0].lat, endLng: locations[0].lng, color: ['#00FF00'] }
-];
+const colors = {
+  heart: "#ff4d4d",
+  path: "#00cc99"
+};
 
-world
-  .arcsData(arcsData)
-  .arcColor('color')
-  .arcDashLength(0.4)
-  .arcDashGap(1)
-  .arcDashInitialGap(() => Math.random())
-  .arcDashAnimateTime(4000);
+function initMapGlobe() {
+  globe = Globe()(document.getElementById("globeViz"))
+    .globeImageUrl("//unpkg.com/three-globe/example/img/earth-night.jpg")
+    .backgroundColor("#000000")
+    .pointOfView({ lat: 10, lng: 10, altitude: 2 }, 3000)
+    .arcColor(() => colors.path)
+    .arcAltitude(0.2)
+    .arcDashLength(0.5)
+    .arcDashGap(4)
+    .arcDashInitialGap(() => Math.random() * 5)
+    .arcDashAnimateTime(2000)
+    .arcsData(getRoutes())
+    .labelsData(countries)
+    .labelLat(d => d.lat)
+    .labelLng(d => d.lng)
+    .labelText(d => d.name)
+    .labelColor(() => "white")
+    .labelSize(1)
+    .labelDotRadius(0.3)
+    .onLabelClick(showMessage);
 
-// Resize support
-window.addEventListener('resize', () => {
-  world.width([window.innerWidth]);
-  world.height([window.innerHeight]);
-});
+  rotateGlobe();
+}
 
+function getRoutes() {
+  return [
+    { startLat: countries[0].lat, startLng: countries[0].lng, endLat: countries[1].lat, endLng: countries[1].lng },
+    { startLat: countries[1].lat, startLng: countries[1].lng, endLat: countries[2].lat, endLng: countries[2].lng }
+  ];
+}
+
+function rotateGlobe() {
+  let angle = 0;
+  setInterval(() => {
+    angle += 0.2;
+    globe.pointOfView({ lat: 10, lng: angle }, 50);
+  }, 75);
+}
+
+function showMessage(d) {
+  alert(d.message);
+}
+
+window.addEventListener("DOMContentLoaded", initMapGlobe);
