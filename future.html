@@ -15,14 +15,14 @@
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
+      height: 100%;
       font-family: 'Quicksand', sans-serif;
-      color: #ffffff;
-      overflow: hidden;
       background: #000;
+      color: #ffffff;
+      overflow-x: hidden;
     }
 
-    /* Starry background */
     .stars {
       width: 100%;
       height: 100%;
@@ -33,6 +33,7 @@
       top: 0;
       left: 0;
       z-index: 0;
+      pointer-events: none;
     }
 
     @keyframes starScroll {
@@ -40,17 +41,35 @@
       100% { background-position: 0 -10000px; }
     }
 
+    .content-wrapper {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
     .future {
       max-width: 720px;
-      padding: 3rem;
-      margin: 2rem auto;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 3rem 2rem;
       text-align: center;
       background: rgba(255, 255, 255, 0.05);
       border-radius: 2rem;
       backdrop-filter: blur(15px);
       box-shadow: 0 0 40px rgba(0, 255, 180, 0.15);
-      position: relative;
-      z-index: 1;
+    }
+
+    .future::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .future::-webkit-scrollbar-thumb {
+      background-color: rgba(255,255,255,0.2);
+      border-radius: 3px;
     }
 
     .future h1 {
@@ -75,11 +94,18 @@
       font-weight: bold;
       text-decoration: none;
       transition: background 0.3s ease, transform 0.2s ease;
+      margin-top: 1.5rem;
     }
 
     .btn:hover {
       background: #009977;
       transform: scale(1.05);
+    }
+
+    @media (max-height: 700px) {
+      .future {
+        max-height: 75vh;
+      }
     }
   </style>
 </head>
@@ -88,15 +114,18 @@
   <!-- Stars Background -->
   <div class="stars"></div>
 
-  <div class="future">
-    <h1>Our Forever 💚</h1>
-    <p>
-      I dream of the day this distance melts away — when timezone math, video calls, and countdown apps become memories we smile about. I imagine waking up to your sleepy eyes and messy hair, pulling you in for a lazy morning hug before we start our day. I see us grocery shopping hand in hand, laughing over what to cook for dinner. I picture us dancing barefoot in the living room, making up silly songs in the car, and kissing under the stars just because we can.
-    </p>
-    <p>
-      I want the ordinary days with you — the cozy, quiet, everyday moments that feel like magic because you’re in them. I want us chasing dreams together, exploring new cities and flavors, learning each other’s rhythms and soft spots more deeply. I want us to grow — as individuals, as partners, as best friends. I want a future where I get to love you loudly, fully, and in person. Because it’s you. It’s always been you. And it always will be. 💚
-    </p>
-    <a href="hunt.html" class="btn">Final Surprise 🎁</a>
+  <!-- Scrollable Content -->
+  <div class="content-wrapper">
+    <div class="future">
+      <h1>Our Forever 💚</h1>
+      <p>
+        I dream of the day this distance melts away  when timezone math, video calls, and countdown apps become memories we smile about. I imagine waking up to your sleepy eyes and messy hair, pulling you in for a lazy morning hug before we start our day. I see us grocery shopping hand in hand, laughing over what to cook for dinner. I picture us dancing barefoot in the living room, making up silly songs in the car, and kissing under the stars just because we can.
+      </p>
+      <p>
+        I want the ordinary days with you — the cozy, quiet, everyday moments that feel like magic because you’re in them. I want us chasing dreams together, exploring new cities and flavors, learning each other’s rhythms and soft spots more deeply. I want us to grow — as individuals, as partners, as best friends. I want a future where I get to love you loudly, fully, and in person. Because it’s you. It’s always been you. And it always will be. 💚
+      </p>
+      <a href="hunt.html" class="btn">Final Surprise 🎁</a>
+    </div>
   </div>
 </body>
 </html>
