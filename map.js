@@ -1,4 +1,4 @@
-// map.js — Spinning Globe with Heart Path
+// map.js — Spinning Globe with Heart Path (Dark Romantic Version)
 
 let globe;
 
@@ -9,29 +9,43 @@ const countries = [
 ];
 
 const colors = {
-  heart: "#ff4d4d",
-  path: "#00cc99"
+  heart: "#ff4d4d",  // Red-ish pink for love
+  path: "#00cc99"    // Teal green for hope & connection
 };
 
 function initMapGlobe() {
   globe = Globe()(document.getElementById("globeViz"))
-    .globeImageUrl("//unpkg.com/three-globe/example/img/earth-night.jpg")
-    .backgroundColor("#000000")
+    .globeImageUrl("https://unpkg.com/three-globe/example/img/earth-night.jpg")
+    .backgroundColor("#000000") // Deep black for romantic space-like feel
     .pointOfView({ lat: 10, lng: 10, altitude: 2 }, 3000)
+
+    // Arc animation between countries
     .arcsData(getRoutes())
     .arcColor(() => colors.path)
-    .arcAltitude(0.2)
+    .arcAltitude(0.3)
     .arcDashLength(0.5)
     .arcDashGap(4)
     .arcDashInitialGap(() => Math.random() * 5)
-    .arcDashAnimateTime(2000)
+    .arcDashAnimateTime(4000)
+
+    // Country Labels
     .labelsData(countries)
     .labelLat(d => d.lat)
     .labelLng(d => d.lng)
     .labelText(d => d.name)
-    .labelColor(() => "white")
-    .labelSize(1)
+    .labelColor(() => "#ffccff") // Soft romantic glow
+    .labelSize(1.2)
     .labelDotRadius(0.3)
+
+    // Heart-colored Points at each location
+    .pointsData(countries)
+    .pointLat(d => d.lat)
+    .pointLng(d => d.lng)
+    .pointColor(() => colors.heart)
+    .pointAltitude(0.05)
+    .pointRadius(0.3)
+
+    // Click to show messages
     .onLabelClick(showMessage);
 
   rotateGlobe();
