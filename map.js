@@ -1,5 +1,4 @@
-// map.js — Interactive Spinning Globe with Heart Route
-
+// map.js — Spinning Globe with Heart Path
 let globe;
 const countries = [
   { name: "Kenya", lat: -1.2921, lng: 36.8219, message: "Where our story began ❤️" },
