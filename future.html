@@ -15,103 +15,132 @@
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
+      height: 100%;
       font-family: 'Quicksand', sans-serif;
-      color: #ffffff;
       background: #000;
+      color: #ffffff;
       overflow-x: hidden;
     }
 
-    /* Starry background */
-    .stars {
-      width: 100%;
-      height: 100%;
-      background: black url('https://raw.githubusercontent.com/VincentGarreau/particles.js/master/demo/media/star.png') repeat top center;
-      background-size: contain;
-      animation: starScroll 100s linear infinite;
+    body::before {
+      content: '';
       position: fixed;
       top: 0;
       left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+      opacity: 0.3;
       z-index: 0;
+      pointer-events: none;
+      animation: twinkle 2s infinite;
     }
 
-    @keyframes starScroll {
-      0% { background-position: 0 0; }
-      100% { background-position: 0 -10000px; }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
     }
 
-    .future {
-      max-width: 720px;
-      padding: 3rem;
-      margin: 4rem auto;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 2rem;
-      backdrop-filter: blur(15px);
-      box-shadow: 0 0 40px rgba(0, 255, 180, 0.15);
+    .shooting-star {
+      position: fixed;
+      width: 3px;
+      height: 80px;
+      background: linear-gradient(transparent, #fff);
+      z-index: 0;
+      opacity: 0;
+      animation: shoot 3s linear infinite;
+    }
+
+    @keyframes shoot {
+      0% {
+        opacity: 0;
+        transform: translateX(0) translateY(0) rotate(45deg);
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(-100vw) translateY(100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    .shooting-star:nth-child(1) { top: 10%; left: 90%; animation-delay: 0s; }
+    .shooting-star:nth-child(2) { top: 20%; left: 70%; animation-delay: 1.5s; }
+    .shooting-star:nth-child(3) { top: 30%; left: 80%; animation-delay: 3s; }
+    .shooting-star:nth-child(4) { top: 15%; left: 60%; animation-delay: 4.2s; }
+    .shooting-star:nth-child(5) { top: 5%; left: 95%; animation-delay: 5.5s; }
+
+    .container {
       position: relative;
       z-index: 1;
-      animation: fadeIn 2s ease-in;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 6rem;
+      text-align: center;
+      animation: fadeIn 3s ease-in-out forwards;
+      opacity: 0;
     }
 
-    .future h1 {
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .container h1 {
       font-family: 'Pacifico', cursive;
       font-size: 2.8rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       color: #a0ffe6;
-      animation: fadeInUp 2s ease-out;
     }
 
-    .future p {
+    .container p {
       font-size: 1.2rem;
-      line-height: 1.9;
-      margin-bottom: 1.8rem;
-      animation: fadeInUp 2.5s ease-out;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
     }
 
     .btn {
       display: inline-block;
+      margin-top: 2rem;
       padding: 0.9rem 1.7rem;
       background: #00cc99;
       color: #fff;
       border-radius: 2rem;
       font-weight: bold;
       text-decoration: none;
-      transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.4s ease;
-      animation: fadeInUp 3s ease-out;
-      box-shadow: 0 0 12px #00cc99;
+      transition: background 0.3s ease, transform 0.2s ease, box-shadow 1.5s ease-in-out;
+      box-shadow: 0 0 15px rgba(0, 204, 153, 0.4);
+      animation: glow 2s ease-in-out infinite alternate;
     }
 
     .btn:hover {
       background: #009977;
       transform: scale(1.05);
-      box-shadow: 0 0 20px #00ffcc;
     }
 
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes fadeInUp {
-      0% {
-        opacity: 0;
-        transform: translateY(30px);
+    @keyframes glow {
+      from {
+        box-shadow: 0 0 15px rgba(0, 204, 153, 0.4);
       }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
+      to {
+        box-shadow: 0 0 25px rgba(0, 204, 153, 0.9);
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Stars Background -->
-  <div class="stars"></div>
+  <!-- Shooting Stars -->
+  <div class="shooting-star"></div>
+  <div class="shooting-star"></div>
+  <div class="shooting-star"></div>
+  <div class="shooting-star"></div>
+  <div class="shooting-star"></div>
 
-  <div class="future">
+  <div class="container">
     <h1>Our Forever 💚</h1>
     <p>
       I dream of the day this distance melts away — when timezone math, video calls, and countdown apps become memories we smile about. I imagine waking up to your sleepy eyes and messy hair, pulling you in for a lazy morning hug before we start our day. I see us grocery shopping hand in hand, laughing over what to cook for dinner. I picture us dancing barefoot in the living room, making up silly songs in the car, and kissing under the stars just because we can.
@@ -121,5 +150,6 @@
     </p>
     <a href="hunt.html" class="btn">Final Surprise 🎁</a>
   </div>
+
 </body>
-</html>>
+</html>
