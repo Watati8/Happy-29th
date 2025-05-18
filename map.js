@@ -1,5 +1,7 @@
 // map.js — Spinning Globe with Heart Path
+
 let globe;
+
 const countries = [
   { name: "Kenya", lat: -1.2921, lng: 36.8219, message: "Where our story began ❤️" },
   { name: "Dubai", lat: 25.276987, lng: 55.296249, message: "Where you asked me to be yours 🥹" },
@@ -16,13 +18,13 @@ function initMapGlobe() {
     .globeImageUrl("//unpkg.com/three-globe/example/img/earth-night.jpg")
     .backgroundColor("#000000")
     .pointOfView({ lat: 10, lng: 10, altitude: 2 }, 3000)
+    .arcsData(getRoutes())
     .arcColor(() => colors.path)
     .arcAltitude(0.2)
     .arcDashLength(0.5)
     .arcDashGap(4)
     .arcDashInitialGap(() => Math.random() * 5)
     .arcDashAnimateTime(2000)
-    .arcsData(getRoutes())
     .labelsData(countries)
     .labelLat(d => d.lat)
     .labelLng(d => d.lng)
@@ -37,8 +39,18 @@ function initMapGlobe() {
 
 function getRoutes() {
   return [
-    { startLat: countries[0].lat, startLng: countries[0].lng, endLat: countries[1].lat, endLng: countries[1].lng },
-    { startLat: countries[1].lat, startLng: countries[1].lng, endLat: countries[2].lat, endLng: countries[2].lng }
+    {
+      startLat: countries[0].lat,
+      startLng: countries[0].lng,
+      endLat: countries[1].lat,
+      endLng: countries[1].lng
+    },
+    {
+      startLat: countries[1].lat,
+      startLng: countries[1].lng,
+      endLat: countries[2].lat,
+      endLng: countries[2].lng
+    }
   ];
 }
 
