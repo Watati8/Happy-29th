@@ -5,17 +5,84 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Happy Birthday, My Love</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Reset & Fonts */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(135deg, #f5e7e0, #fff0f5);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .centered {
+      max-width: 800px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    h1.heart-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      color: #9b1d20;
+      margin-bottom: 1.5rem;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      color: #444;
+      animation: fadeIn 3s ease-in-out forwards;
+    }
+
+    a.next-button {
+      display: inline-block;
+      background: #9b1d20;
+      color: white;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 30px;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+      animation: fadeIn 4s ease-in-out forwards;
+    }
+
+    a.next-button:hover {
+      background: #b9373f;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      h1.heart-title {
+        font-size: 2.2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <nav>
-    <a href="index.html">Intro</a>
-    <a href="map.html">Love Map</a>
-   <a href="reasons.html" class="button">29 Reasons I Love You</a>
-    <a href="future.html">Our Future</a>
-    <a href="clue.html">Clue</a>
-  </nav>
   <section class="centered">
     <h1 class="heart-title">Happy 29th Birthday, My Love 💚</h1>
     <p>You make the world brighter just by being in it. Today we celebrate you—the way you love, laugh, dream, and live. Here's to all our memories and the forever we're building together. Start this little journey by clicking the button below 💌</p>
