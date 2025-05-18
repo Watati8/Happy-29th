@@ -4,8 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Love Map</title>
-  <link rel="stylesheet" href="styles.css" />
-  
+
   <!-- Fonts for that cute romantic vibe -->
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 
@@ -13,9 +12,96 @@
   <script src="https://unpkg.com/three"></script>
   <script src="https://unpkg.com/three-globe"></script>
   <script src="https://unpkg.com/three/examples/js/controls/OrbitControls.js"></script>
-</head>
-<body>
 
+  <style>
+    /* Base styles */
+    body {
+      margin: 0;
+      background-color: #0d0d0d;
+      font-family: 'Quicksand', sans-serif;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    #globeViz {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .caption {
+      position: absolute;
+      top: 5%;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      z-index: 2;
+      color: #fff;
+    }
+
+    .caption h2 {
+      font-family: 'Pacifico', cursive;
+      font-size: 2em;
+      color: #ff6b81;
+      margin-bottom: 0.5em;
+      text-shadow: 0 0 10px #ff6b81;
+    }
+
+    .caption p {
+      font-size: 1.1em;
+      max-width: 400px;
+      margin: 0 auto 1.5em;
+      color: #f0f0f0;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #ff6b81;
+      color: #fff;
+      padding: 0.7em 1.5em;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 10px #ff6b81;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #ff4757;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      bottom: -50px;
+      font-size: 2rem;
+      animation: floatHearts 6s infinite ease-in-out;
+      z-index: 3;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    @keyframes floatHearts {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+      }
+      50% {
+        transform: translateY(-200px) scale(1.2);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-400px) scale(1);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
   <div id="globeViz"></div>
 
   <div class="caption">
