@@ -2,45 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Our Love Flipbook</title>
+  <title>Our Love Story Flipbook</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand&family=Pacifico&family=Homemade+Apple&display=swap');
+
     body {
       margin: 0;
       font-family: 'Quicksand', sans-serif;
-      background-color: #fff0f6;
-      overflow: hidden;
+      background: linear-gradient(135deg, #ffccd5, #ffe6eb);
+      height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
     }
 
     .flipbook {
-      width: 80vw;
+      width: 90vw;
       max-width: 500px;
-      height: 70vh;
-      background: #fff;
-      border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      height: 75vh;
+      background: #fff0f5;
+      border-radius: 25px;
+      box-shadow: 0 10px 40px rgba(255, 0, 80, 0.2);
+      padding: 2em;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: space-between;
-      padding: 2em;
+      align-items: center;
       position: relative;
-      transition: transform 0.5s ease-in-out;
       text-align: center;
+      border: 2px solid #ff6b81;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .city-emoji {
+      font-size: 5em;
+      margin-bottom: 0.5em;
     }
 
     h2 {
       font-family: 'Pacifico', cursive;
       font-size: 2em;
       color: #d6336c;
+      margin: 0;
     }
 
     p {
-      font-size: 1.1em;
-      color: #444;
+      font-family: 'Homemade Apple', cursive;
+      font-size: 1.4em;
+      color: #6e213c;
+      background: #fff0f5;
+      padding: 1em;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(255, 105, 135, 0.2);
     }
 
     .controls {
@@ -54,23 +72,38 @@
       border: none;
       border-radius: 50px;
       color: white;
-      font-size: 1.2em;
+      font-size: 1.4em;
       padding: 0.5em 1em;
       cursor: pointer;
       transition: background 0.3s ease;
     }
 
     button:hover {
-      background-color: #ff4757;
+      background-color: #e64966;
     }
 
-    .city-image {
-      width: 100%;
-      height: 200px;
-      background-size: cover;
-      background-position: center;
-      border-radius: 12px;
-      margin-bottom: 1em;
+    .page-number {
+      position: absolute;
+      bottom: 1em;
+      font-size: 0.9em;
+      color: #c92a2a;
+    }
+
+    .love-btn {
+      margin-top: 1.5em;
+      background-color: #ff6b81;
+      color: white;
+      padding: 0.7em 1.2em;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 1em;
+      text-decoration: none;
+      box-shadow: 0 0 10px #ff6b81;
+      transition: background 0.3s ease;
+    }
+
+    .love-btn:hover {
+      background-color: #ff4757;
     }
 
   </style>
@@ -78,43 +111,53 @@
 <body>
 
 <div class="flipbook" id="flipbook">
-  <div class="city-image" id="cityImage"></div>
-  <h2 id="cityName"></h2>
-  <p id="messageText"></p>
+  <div class="city-emoji" id="cityEmoji">🏙️</div>
+  <h2 id="cityName">Nairobi, Kenya 🇰🇪</h2>
+  <p id="messageText">Where we first met — full of laughter, late-night talks, and unforgettable firsts.</p>
+
   <div class="controls">
     <button onclick="prevCard()">←</button>
     <button onclick="nextCard()">→</button>
- <a href="reasons.html" class="btn">→ 29 Reasons I Love You</a>
   </div>
-</div>
 
+  <a href="reasons.html" class="love-btn">→ 29 Reasons I Love You</a>
+
+  <div class="page-number" id="pageNumber">1 / 3</div>
+</div>
 
 <script>
   const cities = [
     {
+      emoji: "🌆",
       name: "Nairobi, Kenya 🇰🇪",
-      message: "Where we first met — full of laughter, late-night talks, and unforgettable firsts.",
-      image: "https://images.unsplash.com/photo-1584270354949-6df227e87238"
+      message: "Where we first met — full of laughter, late-night talks, and unforgettable firsts."
     },
     {
+      emoji: "🛫",
       name: "Dubai, UAE 🇦🇪",
-      message: "Where our love deepened — under golden skies and long-distance promises.",
-      image: "https://images.unsplash.com/photo-1504271863819-d3b9db1eae7e"
+      message: "Where our love deepened — across time zones, video calls, and sky-high dreams."
     },
     {
+      emoji: "🌅",
       name: "Perth, Australia 🇦🇺",
-      message: "Where we’re headed — a new chapter of hope, adventure, and home together.",
-      image: "https://images.unsplash.com/photo-1582298911502-3a23a1c13a92"
+      message: "Where forever begins — calm oceans, soft light, and a future we’ll build side by side."
     }
   ];
 
   let index = 0;
+  let flipbook = document.getElementById("flipbook");
 
   function updateCard() {
     const city = cities[index];
+    document.getElementById("cityEmoji").textContent = city.emoji;
     document.getElementById("cityName").textContent = city.name;
     document.getElementById("messageText").textContent = city.message;
-    document.getElementById("cityImage").style.backgroundImage = `url(${city.image})`;
+    document.getElementById("pageNumber").textContent = `${index + 1} / ${cities.length}`;
+
+    // Fade animation
+    flipbook.style.animation = 'none';
+    void flipbook.offsetWidth; // trigger reflow
+    flipbook.style.animation = 'fadeIn 0.8s ease-in-out';
   }
 
   function nextCard() {
@@ -127,8 +170,14 @@
     updateCard();
   }
 
+  // Auto-flip every 10 seconds
+  setInterval(() => {
+    nextCard();
+  }, 10000);
+
   updateCard();
 </script>
 
 </body>
 </html>
+
