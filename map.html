@@ -2,105 +2,133 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Our Love Map</title>
-
-  <!-- Fonts for that cute romantic vibe -->
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-
-  <!-- Required scripts -->
-  <script src="https://unpkg.com/three@0.150.1/build/three.min.js"></script>
-  <script src="https://unpkg.com/three-globe@2.27.0"></script>
-  <script src="https://unpkg.com/three@0.150.1/examples/js/controls/OrbitControls.js"></script>
-
+  <title>Our Love Flipbook</title>
   <style>
     body {
       margin: 0;
-      overflow: hidden;
-      background-color: #0d0d0d;
       font-family: 'Quicksand', sans-serif;
-      color: white;
+      background-color: #fff0f6;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
 
-    #globeViz {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 0;
-    }
-
-    .caption {
-      position: absolute;
-      top: 5%;
-      left: 50%;
-      transform: translateX(-50%);
+    .flipbook {
+      width: 80vw;
+      max-width: 500px;
+      height: 70vh;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2em;
+      position: relative;
+      transition: transform 0.5s ease-in-out;
       text-align: center;
-      z-index: 2;
-      color: #fff;
     }
 
-    .caption h2 {
+    h2 {
       font-family: 'Pacifico', cursive;
       font-size: 2em;
-      color: #ff6b81;
-      text-shadow: 0 0 10px #ff6b81;
-      margin-bottom: 0.5em;
+      color: #d6336c;
     }
 
-    .caption p {
+    p {
       font-size: 1.1em;
-      max-width: 400px;
-      margin: 0 auto 1.5em;
-      color: #f0f0f0;
+      color: #444;
     }
 
-    .btn {
+    .controls {
+      display: flex;
+      gap: 2em;
+      margin-top: 1em;
+    }
+
+    button {
       background-color: #ff6b81;
+      border: none;
+      border-radius: 50px;
       color: white;
-      padding: 0.7em 1.5em;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 10px #ff6b81;
+      font-size: 1.2em;
+      padding: 0.5em 1em;
+      cursor: pointer;
       transition: background 0.3s ease;
     }
 
-    .btn:hover {
+    button:hover {
       background-color: #ff4757;
     }
 
-    .heart {
-      position: fixed;
-      bottom: -50px;
-      font-size: 2rem;
-      animation: floatHearts 6s infinite ease-in-out;
-      z-index: 3;
-      opacity: 0.8;
-      pointer-events: none;
+    .city-image {
+      width: 100%;
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 12px;
+      margin-bottom: 1em;
     }
 
-    @keyframes floatHearts {
-      0% { transform: translateY(0) scale(1); opacity: 0.8; }
-      50% { transform: translateY(-200px) scale(1.2); opacity: 1; }
-      100% { transform: translateY(-400px) scale(1); opacity: 0; }
-    }
   </style>
 </head>
-
 <body>
-  <div id="globeViz"></div>
 
-  <div class="caption">
-    <h2>Kenya 🇰🇪 → Dubai 🇦🇪 → Perth 🇦🇺</h2>
-    <p>This path tells our story — where we met, fell in love, and where we’re headed 💚</p>
-    <a href="reasons.html" class="btn">→ 29 Reasons I Love You</a>
+<div class="flipbook" id="flipbook">
+  <div class="city-image" id="cityImage"></div>
+  <h2 id="cityName"></h2>
+  <p id="messageText"></p>
+  <div class="controls">
+    <button onclick="prevCard()">←</button>
+    <button onclick="nextCard()">→</button>
+ <a href="reasons.html" class="btn">→ 29 Reasons I Love You</a>
   </div>
+</div>
 
-  <span class="heart" style="left: 10%; animation-delay: 1s;">❤️</span>
-  <span class="heart" style="left: 45%; animation-delay: 3s;">💚</span>
-  <span class="heart" style="left: 80%; animation-delay: 5s;">💖</span>
 
-  <script src="map.js"></script>
+<script>
+  const cities = [
+    {
+      name: "Nairobi, Kenya 🇰🇪",
+      message: "Where we first met — full of laughter, late-night talks, and unforgettable firsts.",
+      image: "https://images.unsplash.com/photo-1584270354949-6df227e87238"
+    },
+    {
+      name: "Dubai, UAE 🇦🇪",
+      message: "Where our love deepened — under golden skies and long-distance promises.",
+      image: "https://images.unsplash.com/photo-1504271863819-d3b9db1eae7e"
+    },
+    {
+      name: "Perth, Australia 🇦🇺",
+      message: "Where we’re headed — a new chapter of hope, adventure, and home together.",
+      image: "https://images.unsplash.com/photo-1582298911502-3a23a1c13a92"
+    }
+  ];
+
+  let index = 0;
+
+  function updateCard() {
+    const city = cities[index];
+    document.getElementById("cityName").textContent = city.name;
+    document.getElementById("messageText").textContent = city.message;
+    document.getElementById("cityImage").style.backgroundImage = `url(${city.image})`;
+  }
+
+  function nextCard() {
+    index = (index + 1) % cities.length;
+    updateCard();
+  }
+
+  function prevCard() {
+    index = (index - 1 + cities.length) % cities.length;
+    updateCard();
+  }
+
+  updateCard();
+</script>
+
 </body>
 </html>
-
