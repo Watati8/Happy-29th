@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Our Forever</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Rubik:wght@400;600&display=swap" rel="stylesheet" />
+  <title>Our Future</title>
+
+  <!-- Romantic fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
+
   <style>
     * {
       margin: 0;
@@ -12,112 +15,86 @@
       box-sizing: border-box;
     }
 
-    html, body {
-      height: 100%;
-      overflow-x: hidden;
-      font-family: 'Rubik', sans-serif;
+    body {
+      font-family: 'Quicksand', sans-serif;
       color: #ffffff;
+      overflow: hidden;
       background: #000;
-      position: relative;
     }
 
+    /* Starry background */
     .stars {
+      width: 100%;
+      height: 100%;
+      background: black url('https://raw.githubusercontent.com/VincentGarreau/particles.js/master/demo/media/star.png') repeat top center;
+      background-size: contain;
+      animation: starScroll 100s linear infinite;
       position: fixed;
       top: 0;
       left: 0;
-      height: 100%;
-      width: 100%;
-      background: transparent;
       z-index: 0;
-      pointer-events: none;
     }
 
-    .stars::before, .stars::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 200%;
-      height: 200%;
-      background-image: radial-gradient(white 1px, transparent 1px);
-      background-size: 3px 3px;
-      opacity: 0.2;
-      animation: twinkle 80s linear infinite;
-    }
-
-    .stars::after {
-      background-size: 2px 2px;
-      opacity: 0.15;
-      animation-duration: 120s;
-    }
-
-    @keyframes twinkle {
-      from { transform: translateY(0); }
-      to { transform: translateY(-1000px); }
+    @keyframes starScroll {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 -10000px; }
     }
 
     .future {
+      max-width: 720px;
+      padding: 3rem;
+      margin: 2rem auto;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 2rem;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 40px rgba(0, 255, 180, 0.15);
       position: relative;
       z-index: 1;
-      padding: 4rem 1.5rem 6rem;
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
     }
 
     .future h1 {
-      font-family: 'Great Vibes', cursive;
-      font-size: 3.2rem;
-      color: #90ee90;
-      margin-bottom: 2rem;
+      font-family: 'Pacifico', cursive;
+      font-size: 2.8rem;
+      margin-bottom: 1.5rem;
+      color: #a0ffe6;
     }
 
     .future p {
-      font-size: 1.3rem;
-      line-height: 2;
-      color: #f1f1f1;
-      margin-bottom: 2rem;
-      text-shadow: 0 0 10px rgba(255,255,255,0.2);
+      font-size: 1.2rem;
+      line-height: 1.9;
+      margin-bottom: 1.8rem;
     }
 
     .btn {
       display: inline-block;
-      margin-top: 2rem;
-      padding: 0.8rem 2rem;
-      font-size: 1.1rem;
-      color: #000;
-      background-color: #90ee90;
-      border: none;
-      border-radius: 50px;
+      padding: 0.9rem 1.7rem;
+      background: #00cc99;
+      color: #fff;
+      border-radius: 2rem;
+      font-weight: bold;
       text-decoration: none;
-      box-shadow: 0 0 15px rgba(144, 238, 144, 0.4);
-      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      transition: background 0.3s ease, transform 0.2s ease;
     }
 
     .btn:hover {
+      background: #009977;
       transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(144, 238, 144, 0.8);
     }
   </style>
 </head>
 <body>
+
+  <!-- Stars Background -->
   <div class="stars"></div>
 
   <div class="future">
     <h1>Our Forever 💚</h1>
     <p>
-      I’m praying our long-distance love is short-lived, because I can’t wait to wake up next to you every day.<br><br>
-      To go to the gym together.<br>
-      To cook side by side.<br>
-      To cuddle up with movies and fall asleep in your arms.<br>
-      To sing our hearts out in the car, windows down, no care in the world.<br>
-      To dance like no one's watching, even if it's raining.<br>
-      To wander off on silly little adventures that turn into lifelong memories.<br><br>
-      I dream of mornings with you and lazy Sundays wrapped up in each other.<br>
-      Of traveling the world one passport stamp and one heart-throb at a time.<br><br>
-      I can’t wait to love you up close.<br>
-      I can’t wait to do life with you  fully, fiercely, forever.<br>
-      You and me — always. 💚
+      I dream of the day this distance melts away — when timezone math, video calls, and countdown apps become memories we smile about. I imagine waking up to your sleepy eyes and messy hair, pulling you in for a lazy morning hug before we start our day. I see us grocery shopping hand in hand, laughing over what to cook for dinner. I picture us dancing barefoot in the living room, making up silly songs in the car, and kissing under the stars just because we can.
+    </p>
+    <p>
+      I want the ordinary days with you — the cozy, quiet, everyday moments that feel like magic because you’re in them. I want us chasing dreams together, exploring new cities and flavors, learning each other’s rhythms and soft spots more deeply. I want us to grow — as individuals, as partners, as best friends. I want a future where I get to love you loudly, fully, and in person. Because it’s you. It’s always been you. And it always will be. 💚
     </p>
     <a href="hunt.html" class="btn">Final Surprise 🎁</a>
   </div>
