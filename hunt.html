@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Scavenger Hunt</title>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet" />
+  <title>Our Future</title>
+
+  <!-- Romantic fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
+
   <style>
     * {
       margin: 0;
@@ -13,86 +16,153 @@
     }
 
     body {
-      font-family: 'Rubik', sans-serif;
-      background: #0d0d0d;
+      font-family: 'Quicksand', sans-serif;
       color: #ffffff;
-      overflow: hidden;
+      background: black;
+      overflow-x: hidden;
     }
 
-    .sparkles {
+    /* Starry background */
+    .stars, .twinkling, .shooting-stars {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at 30% 30%, #222 10%, #000 90%);
-      background-size: cover;
+      display: block;
       z-index: 0;
     }
 
-    .sparkles::after {
-      content: "";
+    .stars {
+      background: #000 url('https://raw.githubusercontent.com/VincentGarreau/particles.js/master/demo/media/star.png') repeat;
+      background-size: contain;
+      animation: starScroll 100s linear infinite;
+    }
+
+    .twinkling {
+      background: transparent url('https://i.imgur.com/1X1D1eH.png') repeat;
+      animation: moveTwinkle 200s linear infinite;
+      opacity: 0.4;
+    }
+
+    @keyframes starScroll {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 -10000px; }
+    }
+
+    @keyframes moveTwinkle {
+      from { background-position: 0 0; }
+      to { background-position: -10000px 5000px; }
+    }
+
+    .shooting-stars {
+      pointer-events: none;
+    }
+
+    .shooting-star {
       position: absolute;
-      width: 100%;
-      height: 100%;
-      background-image: url('https://i.imgur.com/0fMZ1Cz.png'); /* tiny sparkle PNG */
-      opacity: 0.1;
-      animation: twinkle 60s linear infinite;
+      width: 2px;
+      height: 100px;
+      background: linear-gradient(-45deg, white, rgba(255, 255, 255, 0));
+      opacity: 0.8;
+      animation: shoot 2s linear infinite;
     }
 
-    @keyframes twinkle {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-2000px); }
+    @keyframes shoot {
+      0% {
+        transform: translate(100vw, -10vh) rotate(-45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-10vw, 100vh) rotate(-45deg);
+        opacity: 0;
+      }
     }
 
-    .hunt {
-      position: relative;
-      z-index: 1;
-      max-width: 700px;
+    .future {
+      max-width: 720px;
+      padding: 3rem;
       margin: 4rem auto;
       text-align: center;
-      padding: 3rem;
       background: rgba(255, 255, 255, 0.05);
       border-radius: 2rem;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 40px rgba(0, 255, 180, 0.15);
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 2s ease-in;
     }
 
-    .hunt h1 {
-      font-size: 2.5rem;
-      color: #66ffcc;
+    .future h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.8rem;
       margin-bottom: 1.5rem;
+      color: #a0ffe6;
+      animation: fadeInUp 2s ease-out;
     }
 
-    .hunt p {
+    .future p {
       font-size: 1.2rem;
-      line-height: 1.8;
-      margin-bottom: 1rem;
+      line-height: 1.9;
+      margin-bottom: 1.8rem;
+      animation: fadeInUp 2.5s ease-out;
     }
 
-    .hunt p::after {
-      content: '🔎';
-      animation: pulse 2s infinite;
+    .btn {
       display: inline-block;
-      margin-left: 5px;
+      padding: 0.9rem 1.7rem;
+      background: #00cc99;
+      color: #fff;
+      border-radius: 2rem;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.4s ease;
+      animation: fadeInUp 3s ease-out;
+      box-shadow: 0 0 12px #00cc99;
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.6; }
-      50% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.6; }
+    .btn:hover {
+      background: #009977;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #00ffcc;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
 <body>
-  <div class="sparkles"></div>
+  <div class="stars"></div>
+  <div class="twinkling"></div>
+  <div class="shooting-stars">
+    <div class="shooting-star" style="top: 20%; left: 80%; animation-delay: 1s;"></div>
+    <div class="shooting-star" style="top: 50%; left: 90%; animation-delay: 4s;"></div>
+    <div class="shooting-star" style="top: 70%; left: 70%; animation-delay: 7s;"></div>
+  </div>
 
-  <div class="hunt">
-    <h1>Scavenger Hunt Begins 🕵️‍♂️</h1>
-    <p>There’s a clue waiting for you… but not here.</p>
-    <p>Check your email inbox. Look for a message with the subject line: <strong>“Your Next Stop…”</strong> ✉️</p>
-    <p>What happens after that? Well… let’s just say things are about to get interesting 😏</p>
-    <p>Stay alert, Agent. Your journey has just begun.</p>
+  <div class="future">
+    <h1>Our Forever 💚</h1>
+    <p>
+      I dream of the day this distance melts away — when timezone math, video calls, and countdown apps become memories we smile about. I imagine waking up to your sleepy eyes and messy hair, pulling you in for a lazy morning hug before we start our day. I see us grocery shopping hand in hand, laughing over what to cook for dinner. I picture us dancing barefoot in the living room, making up silly songs in the car, and kissing under the stars just because we can.
+    </p>
+    <p>
+      I want the ordinary days with you — the cozy, quiet, everyday moments that feel like magic because you’re in them. I want us chasing dreams together, exploring new cities and flavors, learning each other’s rhythms and soft spots more deeply. I want us to grow — as individuals, as partners, as best friends. I want a future where I get to love you loudly, fully, and in person. Because it’s you. It’s always been you. And it always will be. 💚
+    </p>
+    <a href="hunt.html" class="btn">Final Surprise 🎁</a>
   </div>
 </body>
 </html>
