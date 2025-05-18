@@ -2,33 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Our Love Map</title>
 
   <!-- Fonts for that cute romantic vibe -->
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- Required Three.js & Globe dependencies -->
-  <script src="https://unpkg.com/three"></script>
-  <script src="https://unpkg.com/three-globe"></script>
-  <script src="https://unpkg.com/three/examples/js/controls/OrbitControls.js"></script>
+  <!-- Required scripts -->
+  <script src="https://unpkg.com/three@0.150.1/build/three.min.js"></script>
+  <script src="https://unpkg.com/three-globe@2.27.0"></script>
+  <script src="https://unpkg.com/three@0.150.1/examples/js/controls/OrbitControls.js"></script>
 
   <style>
-    /* Base styles */
     body {
       margin: 0;
+      overflow: hidden;
       background-color: #0d0d0d;
       font-family: 'Quicksand', sans-serif;
-      overflow: hidden;
-      color: #fff;
+      color: white;
     }
 
     #globeViz {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       z-index: 0;
     }
 
@@ -46,8 +43,8 @@
       font-family: 'Pacifico', cursive;
       font-size: 2em;
       color: #ff6b81;
-      margin-bottom: 0.5em;
       text-shadow: 0 0 10px #ff6b81;
+      margin-bottom: 0.5em;
     }
 
     .caption p {
@@ -58,9 +55,8 @@
     }
 
     .btn {
-      display: inline-block;
       background-color: #ff6b81;
-      color: #fff;
+      color: white;
       padding: 0.7em 1.5em;
       border-radius: 25px;
       text-decoration: none;
@@ -73,7 +69,6 @@
       background-color: #ff4757;
     }
 
-    /* Floating hearts */
     .heart {
       position: fixed;
       bottom: -50px;
@@ -85,18 +80,9 @@
     }
 
     @keyframes floatHearts {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 0.8;
-      }
-      50% {
-        transform: translateY(-200px) scale(1.2);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-400px) scale(1);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) scale(1); opacity: 0.8; }
+      50% { transform: translateY(-200px) scale(1.2); opacity: 1; }
+      100% { transform: translateY(-400px) scale(1); opacity: 0; }
     }
   </style>
 </head>
@@ -110,12 +96,11 @@
     <a href="reasons.html" class="btn">→ 29 Reasons I Love You</a>
   </div>
 
-  <!-- Floating hearts -->
   <span class="heart" style="left: 10%; animation-delay: 1s;">❤️</span>
   <span class="heart" style="left: 45%; animation-delay: 3s;">💚</span>
   <span class="heart" style="left: 80%; animation-delay: 5s;">💖</span>
 
-  <!-- Your custom script -->
-  <script src="map.js" defer></script>
+  <script src="map.js"></script>
 </body>
 </html>
+
