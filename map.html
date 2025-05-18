@@ -1,4 +1,3 @@
-<!-- map.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,17 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Love Map</title>
   <link rel="stylesheet" href="styles.css" />
-  <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js"></script>
+  
+  <!-- Fonts for that cute romantic vibe -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Required Three.js & Globe dependencies -->
+  <script src="https://unpkg.com/three"></script>
+  <script src="https://unpkg.com/three-globe"></script>
+  <script src="https://unpkg.com/three/examples/js/controls/OrbitControls.js"></script>
 </head>
 <body>
+
   <div id="globeViz"></div>
+
   <div class="caption">
     <h2>Kenya 🇰🇪 → Dubai 🇦🇪 → Perth 🇦🇺</h2>
     <p>This path tells our story — where we met, fell in love, and where we’re headed 💚</p>
-    <a href="reasons.html" class="btn">29 Reasons I Love You</a>
+    <a href="reasons.html" class="btn">→ 29 Reasons I Love You</a>
   </div>
 
-  <!-- ✅ Import your script as a module at the bottom -->
-  <script type="module" src="map.js"></script>
+  <!-- Floating hearts -->
+  <span class="heart" style="left: 10%; animation-delay: 1s;">❤️</span>
+  <span class="heart" style="left: 45%; animation-delay: 3s;">💚</span>
+  <span class="heart" style="left: 80%; animation-delay: 5s;">💖</span>
+
+  <!-- Your custom script -->
+  <script src="map.js" defer></script>
 </body>
 </html>
